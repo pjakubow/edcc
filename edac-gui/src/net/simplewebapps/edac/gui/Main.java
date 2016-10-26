@@ -1,4 +1,4 @@
-package sample;
+package net.simplewebapps.edac.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
