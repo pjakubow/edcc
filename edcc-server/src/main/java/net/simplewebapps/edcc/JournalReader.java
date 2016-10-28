@@ -1,15 +1,14 @@
-package net.simplewebapps.edac;
+package net.simplewebapps.edcc;
 
-import net.simplewebapps.edac.event.Event;
+import net.simplewebapps.edcc.event.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.ParseException;
-import java.time.Clock;
-import java.time.LocalDateTime;
 
 @Component
 public class JournalReader {
@@ -25,8 +24,7 @@ public class JournalReader {
     }
 
     //    @Scheduled(fixedRateString = "${edac.reader.delay}")
-    public void readJornal() {
-        log.info("Hey! It's {}", LocalDateTime.now(Clock.systemDefaultZone()));
+    public void readJournal() {
         pointer = 0;
         try (RandomAccessFile file = new RandomAccessFile(findNewestLogfile(), "r")) {
             readLoop(file);
@@ -66,6 +64,7 @@ public class JournalReader {
     }
 
     private String findNewestLogfile() {
-        return "D:\\work\\workspaces\\edac\\edac-server\\src\\test\\resources\\Journal.161025234203.01.log";
+        String s = getClass().getClassLoader().getResource("Journal.161025234203.01.log").getPath();
+        return s;
     }
 }

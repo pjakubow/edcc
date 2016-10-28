@@ -1,15 +1,13 @@
-package net.simplewebapps.edac.event;
+package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 import java.util.Date;
 
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.*;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "event")
-@JsonTypeIdResolver(EventTypeResolver.class)
 public abstract class Event {
 
     protected Date timestamp;

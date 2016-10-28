@@ -1,8 +1,8 @@
-package net.simplewebapps.edac.event;
+package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@JsonTypeName("Fileheader")
+@JsonTypeName
 public class Fileheader extends Event {
 
     private Integer part;
@@ -40,5 +40,15 @@ public class Fileheader extends Event {
 
     public void setBuild(String build) {
         this.build = build;
+    }
+
+    @Override
+    public String toString() {
+        return "Fileheader{" + "timestamp=" + timestamp +
+          ", part=" + part +
+          ", language='" + language + '\'' +
+          ", gameversion='" + gameversion + '\'' +
+          ", build='" + build + '\'' +
+          '}';
     }
 }

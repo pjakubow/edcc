@@ -1,7 +1,7 @@
-package net.simplewebapps.edac;
+package net.simplewebapps.edcc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.simplewebapps.edac.event.Event;
+import net.simplewebapps.edcc.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

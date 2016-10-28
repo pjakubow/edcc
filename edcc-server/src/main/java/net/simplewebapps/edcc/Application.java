@@ -1,4 +1,4 @@
-package net.simplewebapps.edac;
+package net.simplewebapps.edcc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +15,6 @@ public class Application {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class);
 
         JournalReader journalReader = ctx.getBean(JournalReader.class);
-        journalReader.readJornal();
+        journalReader.readJournal();
     }
 }

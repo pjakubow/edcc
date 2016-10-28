@@ -1,8 +1,10 @@
-package net.simplewebapps.edac.event;
+package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-public class LoadGame {
+@JsonTypeName
+public class LoadGame extends Event {
 
     @JsonProperty("Commander")
     private String commander;
@@ -14,7 +16,7 @@ public class LoadGame {
     private Integer shipId;
 
     @JsonProperty("GameMode")
-    private Integer gameMode;
+    private String gameMode;
 
     @JsonProperty("Credits")
     private Long credits;
@@ -46,11 +48,11 @@ public class LoadGame {
         this.shipId = shipId;
     }
 
-    public Integer getGameMode() {
+    public String getGameMode() {
         return gameMode;
     }
 
-    public void setGameMode(Integer gameMode) {
+    public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
     }
 
@@ -68,5 +70,17 @@ public class LoadGame {
 
     public void setLoan(Long loan) {
         this.loan = loan;
+    }
+
+    @Override
+    public String toString() {
+        return "LoadGame{" + "timestamp='" + timestamp + '\'' +
+          ", commander='" + commander + '\'' +
+          ", ship='" + ship + '\'' +
+          ", shipId=" + shipId +
+          ", gameMode='" + gameMode + '\'' +
+          ", credits=" + credits +
+          ", loan=" + loan +
+          '}';
     }
 }
