@@ -14,19 +14,22 @@ import java.text.ParseException;
 public class JournalReader {
 
     private static final Logger log = LoggerFactory.getLogger(JournalReader.class);
+
+    private final LineProcessor lineProcessor;
+
+    private final Repository repository;
+
     private long pointer = 0;
 
-    private LineProcessor lineProcessor;
-
     @Autowired
-    public JournalReader(LineProcessor lineProcessor) {
+    public JournalReader(LineProcessor lineProcessor, Repository repository) {
         this.lineProcessor = lineProcessor;
+        this.repository = repository;
     }
 
-    //    @Scheduled(fixedRateString = "${edac.reader.delay}")
-    public void readJournal() {
+    public void readJournal(String journalFile) {
         pointer = 0;
-        try (RandomAccessFile file = new RandomAccessFile(findNewestLogfile(), "r")) {
+        try (RandomAccessFile file = new RandomAccessFile(journalFile, "r")) {
             readLoop(file);
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,6 +44,7 @@ public class JournalReader {
             try {
                 Event event = lineProcessor.process(file.readLine());
                 log.info("got event: {}", event);
+                repository.save(event);
                 failures = 0;
             } catch (Exception e) {
                 log.warn(e.getMessage());
@@ -61,10 +65,5 @@ public class JournalReader {
 
         if (line.contains("Type6"))
             throw new ParseException("boo2!", 2);
-    }
-
-    private String findNewestLogfile() {
-        String s = getClass().getClassLoader().getResource("Journal.161025234203.01.log").getPath();
-        return s;
     }
 }
