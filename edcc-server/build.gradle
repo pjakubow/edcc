@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -11,8 +12,6 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
@@ -21,6 +20,7 @@ jar {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
