@@ -3,28 +3,40 @@ version '1.0-SNAPSHOT'
 
 buildscript {
   dependencies {
-    classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.7.0'
+    classpath 'de.dynamicfiles.projects.gradle.plugins:javafx-gradle-plugin:8.7.0'
   }
   repositories {
     mavenLocal()
     mavenCentral()
-
   }
 }
+
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'javafx-gradle-plugin'
 
 repositories {
   mavenLocal()
   mavenCentral()
 }
 
-apply plugin: 'javafx-gradle-plugin'
-
+dependencies {
+  compile project(':edcc-server')
+}
 
 jfx {
   // minimal requirement for jfxJar-task
-  mainClass = 'net.simplewebapps.edcc.gui.Main'
+  mainClass = 'net.simplewebapps.edcc.JavaFxMain'
 
   // minimal requirement for jfxNative-task
   vendor = 'SimpleWebApps'
+  appName = "EDCC"
+
+  bundler = 'exe'
+
+  certDomain = 'simplewebapps.net' // required
+  certOrgUnit = null // defaults to "none"
+  certOrg = 'SimpleWebApps' // required
+  certState = 'Warsaw' // required
+  certCountry = 'Poland' // required
 }

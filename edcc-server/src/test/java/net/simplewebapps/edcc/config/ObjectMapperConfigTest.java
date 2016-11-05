@@ -14,8 +14,7 @@ public class ObjectMapperConfigTest {
 
     @Test
     public void shouldRegisterAllSubtypes() throws Exception {
-        ObjectMapperConfig config = new ObjectMapperConfig();
-        ObjectMapper mapper = config.objectMapper();
+        ObjectMapper mapper = new ObjectMapperConfig().objectMapper();
 
         assertThat(mapper, registers(Fileheader.class));
         assertThat(mapper, registers(LoadGame.class));

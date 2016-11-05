@@ -1,6 +1,6 @@
 package net.simplewebapps.edcc;
 
-import net.simplewebapps.edcc.event.Event;
+import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +40,15 @@ public class JournalReader {
         int failures = 0;
         while (true) {
             pointer = file.getFilePointer();
-            log.info("saved pointer: {}", pointer);
             try {
-                Event event = lineProcessor.process(file.readLine());
-                log.info("got event: {}", event);
-                repository.save(event);
+                repository.save(lineProcessor.process(file.readLine()));
                 failures = 0;
+            } catch (InvalidTypeIdException itie) {
+                log.warn(itie.getMessage());
+                continue;
             } catch (Exception e) {
                 log.warn(e.getMessage());
-                log.info("real pointer: {}, saved pointer: {}", file.getFilePointer(), pointer);
+                log.info("current pointer: {}, saved pointer: {}", file.getFilePointer(), pointer);
                 Thread.sleep(10000L);
                 file.seek(pointer);
                 failures++;

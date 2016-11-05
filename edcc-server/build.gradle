@@ -12,12 +12,22 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 apply plugin: 'spring-boot'
 
 jar {
     baseName = 'edcc-server'
     version =  '1.0-SNAPSHOT'
+    manifest.attributes provider: 'gradle'
 }
+
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            from components.java
+//        }
+//    }
+//}
 
 repositories {
     mavenLocal()
@@ -29,7 +39,7 @@ targetCompatibility = 1.8
 
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter:1.4.1.RELEASE")
     compile("com.fasterxml.jackson.core:jackson-core:2.8.4")
     compile("com.fasterxml.jackson.core:jackson-annotations:2.8.4")
     compile("com.fasterxml.jackson.core:jackson-databind:2.8.4")

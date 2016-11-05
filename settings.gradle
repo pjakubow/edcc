@@ -1,1 +1,3 @@
-include 'edcc-server', 'edcc-gui'
+include 'edcc-server'
+include 'edcc-gui'
+
