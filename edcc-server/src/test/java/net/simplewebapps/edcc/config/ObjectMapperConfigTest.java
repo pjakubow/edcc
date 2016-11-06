@@ -2,9 +2,7 @@ package net.simplewebapps.edcc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.simplewebapps.edcc.JournalReader;
-import net.simplewebapps.edcc.event.Event;
-import net.simplewebapps.edcc.event.Fileheader;
-import net.simplewebapps.edcc.event.LoadGame;
+import net.simplewebapps.edcc.event.*;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.not;
@@ -18,6 +16,8 @@ public class ObjectMapperConfigTest {
 
         assertThat(mapper, registers(Fileheader.class));
         assertThat(mapper, registers(LoadGame.class));
+        assertThat(mapper, registers(ClearSavedGame.class));
+        assertThat(mapper, registers(NewCommander.class));
         assertThat(mapper, not(registers(JournalReader.class)));
     }
 

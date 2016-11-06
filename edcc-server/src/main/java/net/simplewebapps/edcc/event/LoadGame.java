@@ -2,6 +2,7 @@ package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import net.simplewebapps.edcc.GameMode;
 
 @JsonTypeName
 public class LoadGame extends Event {
@@ -15,8 +16,17 @@ public class LoadGame extends Event {
     @JsonProperty("ShipID")
     private Integer shipId;
 
+    @JsonProperty("StartLanded")
+    private Boolean startLanded;
+
+    @JsonProperty("StartDead")
+    private Boolean startDead;
+
     @JsonProperty("GameMode")
-    private String gameMode;
+    private GameMode gameMode;
+
+    @JsonProperty("Group")
+    private String group;
 
     @JsonProperty("Credits")
     private Long credits;
@@ -48,12 +58,36 @@ public class LoadGame extends Event {
         this.shipId = shipId;
     }
 
-    public String getGameMode() {
+    public Boolean getStartLanded() {
+        return startLanded;
+    }
+
+    public void setStartLanded(Boolean startLanded) {
+        this.startLanded = startLanded;
+    }
+
+    public Boolean getStartDead() {
+        return startDead;
+    }
+
+    public void setStartDead(Boolean startDead) {
+        this.startDead = startDead;
+    }
+
+    public GameMode getGameMode() {
         return gameMode;
     }
 
-    public void setGameMode(String gameMode) {
+    public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public Long getCredits() {
@@ -78,7 +112,10 @@ public class LoadGame extends Event {
           ", commander='" + commander + '\'' +
           ", ship='" + ship + '\'' +
           ", shipId=" + shipId +
+          ", startLanded=" + startLanded +
+          ", startDead=" + startDead +
           ", gameMode='" + gameMode + '\'' +
+          ", group='" + group + '\'' +
           ", credits=" + credits +
           ", loan=" + loan +
           '}';

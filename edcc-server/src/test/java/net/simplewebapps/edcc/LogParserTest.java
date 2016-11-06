@@ -3,8 +3,7 @@ package net.simplewebapps.edcc;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import net.simplewebapps.edcc.config.ObjectMapperConfig;
-import net.simplewebapps.edcc.event.Event;
-import net.simplewebapps.edcc.event.Fileheader;
+import net.simplewebapps.edcc.event.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,12 +82,72 @@ public class LogParserTest {
 
     }
 
+    @Test
+    public void shouldParseClearSavedGameEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-06-10T14:32:03Z\", \"event\":\"ClearSavedGame\", \"Name\":\"AJRee\" }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(ClearSavedGame.class);
+        assertThat(((ClearSavedGame) event).getName()).isEqualTo("AJRee");
+    }
+
+    @Test
+    public void shouldParseNewCommanderEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-06-10T14:32:03Z\", \"event\":\"NewCommander\", \"Name\":\"AJRee\", \"Package\":\"ImperialBountyHunter\" }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(NewCommander.class);
+        assertThat(((NewCommander) event).getName()).isEqualTo("AJRee");
+        assertThat(((NewCommander) event).getStarterPackage()).isEqualTo("ImperialBountyHunter");
+    }
+
+    @Test
+    public void shouldParseLoadGameEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-06-10T14:32:03Z\", \"event\":\"LoadGame\", \"Commander\":\"AJRee\", \"Ship\":\"CobraMkIII\", \"ShipID\":1, \"GameMode\":\"Group\", \"Group\":\"Le Group Name\", \"Credits\":600120, \"Loan\":0  }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(LoadGame.class);
+        assertThat(((LoadGame) event).getCommander()).isEqualTo("AJRee");
+        assertThat(((LoadGame) event).getShip()).isEqualTo("CobraMkIII");
+        assertThat(((LoadGame) event).getShipId()).isEqualTo(1);
+        assertThat(((LoadGame) event).getStartLanded()).isNull();
+        assertThat(((LoadGame) event).getStartDead()).isNull();
+        assertThat(((LoadGame) event).getGameMode()).isEqualTo(GameMode.Group);
+        assertThat(((LoadGame) event).getGroup()).isEqualTo("Le Group Name");
+        assertThat(((LoadGame) event).getCredits()).isEqualTo(600_120);
+        assertThat(((LoadGame) event).getLoan()).isEqualTo(0);
+    }
+
+    /*
+
+    @Test
+    public void shouldParseEvent() throws Exception {
+        // given
+        String line = "";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(ClearSavedGame.class);
+        assertThat(((ClearSavedGame) event).getName()).isEqualTo("");
+    }
+    */
+
     private String format(Date timestamp) {
         ZonedDateTime zonedDateTime = timestamp.toInstant().atZone(ZoneId.of("Europe/Warsaw"));
         return zonedDateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
-    private Date toDate(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
