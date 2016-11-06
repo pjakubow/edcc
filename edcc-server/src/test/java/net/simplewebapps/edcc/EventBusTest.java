@@ -4,6 +4,8 @@ import net.simplewebapps.edcc.event.ClearSavedGame;
 import net.simplewebapps.edcc.event.Fileheader;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.mockito.Mockito.*;
 
 public class EventBusTest {
@@ -15,8 +17,7 @@ public class EventBusTest {
         EventSubscriber eventSubscriber = mock(EventSubscriber.class);
         when(eventSubscriber.accepts(ClearSavedGame.class)).thenReturn(true);
 
-        EventBus eventBus = new EventBus();
-        eventBus.addSubscriber(eventSubscriber);
+        EventBus eventBus = new EventBus(Collections.singleton(eventSubscriber));
 
         // when
         eventBus.publish(new ClearSavedGame());
@@ -32,8 +33,7 @@ public class EventBusTest {
         EventSubscriber eventSubscriber = mock(EventSubscriber.class);
         when(eventSubscriber.accepts(Fileheader.class)).thenReturn(false);
 
-        EventBus eventBus = new EventBus();
-        eventBus.addSubscriber(eventSubscriber);
+        EventBus eventBus = new EventBus(Collections.singleton(eventSubscriber));
 
         // when
         eventBus.publish(new Fileheader());

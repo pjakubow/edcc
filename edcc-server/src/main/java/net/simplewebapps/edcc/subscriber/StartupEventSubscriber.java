@@ -5,7 +5,9 @@ import net.simplewebapps.edcc.event.Fileheader;
 import net.simplewebapps.edcc.event.LoadGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StartupEventSubscriber extends BaseEventSubscriber {
 
     private final static Logger log = LoggerFactory.getLogger(StartupEventSubscriber.class);

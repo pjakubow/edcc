@@ -26,16 +26,16 @@ public class ObjectMapperConfig {
         return objectMapper;
     }
 
-    private <T> List<Class<? extends T>> findSubtypesOf(Class<T> superClazz) {
+    private List<Class<?>> findSubtypesOf(Class<?> superClazz) {
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(true);
         provider.addIncludeFilter(new AnnotationTypeFilter(JsonTypeName.class));
         Set<BeanDefinition> candidateComponents = provider.findCandidateComponents("net/simplewebapps/edcc");
-        List<Class<? extends T>> subtypes = new ArrayList<>();
+        List<Class<?>> subtypes = new ArrayList<>();
         for (BeanDefinition def : candidateComponents) {
             try {
                 Class<?> clazz = Class.forName(def.getBeanClassName());
                 if (superClazz.isAssignableFrom(clazz)) {
-                    subtypes.add((Class<? extends T>) clazz);
+                    subtypes.add(clazz);
                 }
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);

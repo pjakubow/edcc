@@ -1,19 +1,23 @@
 package net.simplewebapps.edcc;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
+@Component
 public class EventBus {
 
-    List<EventSubscriber> subscribers = new ArrayList<>();
+    private final Set<EventSubscriber> subscribers;
 
-    public void publish(Event event) {
-        subscribers.stream()
-                .filter(s -> s.accepts(event.getClass()))
-                .forEach(s -> s.onEvent(event));
+    @Autowired
+    public EventBus(Set<EventSubscriber> subscribers) {
+        this.subscribers = subscribers;
     }
 
-    public void addSubscriber(EventSubscriber eventSubscriber) {
-        subscribers.add(eventSubscriber);
+    public void publish(Event event) {
+        subscribers.parallelStream()
+                .filter(s -> s.accepts(event.getClass()))
+                .forEach(s -> s.onEvent(event));
     }
 }
