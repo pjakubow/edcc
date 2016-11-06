@@ -44,7 +44,7 @@ public class Fileheader extends Event {
 
     @Override
     public String toString() {
-        return "Fileheader{" + "timestamp=" + timestamp +
+        return "Fileheader{" + "timestamp=" + getTimestamp() +
           ", part=" + part +
           ", language='" + language + '\'' +
           ", gameversion='" + gameversion + '\'' +

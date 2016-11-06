@@ -10,6 +10,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ObjectMapperMatcher extends TypeSafeMatcher<ObjectMapper> {
 
@@ -25,10 +26,8 @@ public class ObjectMapperMatcher extends TypeSafeMatcher<ObjectMapper> {
             SubtypeResolver subtypeResolver = item.getSubtypeResolver();
             Field registeredSubtypes = StdSubtypeResolver.class.getDeclaredField("_registeredSubtypes");
             registeredSubtypes.setAccessible(true);
-            return ((LinkedHashSet<NamedType>) registeredSubtypes.get(subtypeResolver)).stream()
-                    .filter(nt -> nt.getType().equals(subtype))
-                    .findAny()
-                    .isPresent();
+            return ((Set<NamedType>) registeredSubtypes.get(subtypeResolver)).stream()
+                    .anyMatch(nt -> nt.getType().equals(subtype));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

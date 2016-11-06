@@ -74,7 +74,7 @@ public class LoadGame extends Event {
 
     @Override
     public String toString() {
-        return "LoadGame{" + "timestamp='" + timestamp + '\'' +
+        return "LoadGame{" + "timestamp='" + getTimestamp() + '\'' +
           ", commander='" + commander + '\'' +
           ", ship='" + ship + '\'' +
           ", shipId=" + shipId +
