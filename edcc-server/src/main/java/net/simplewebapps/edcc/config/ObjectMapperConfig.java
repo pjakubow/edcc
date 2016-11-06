@@ -3,21 +3,16 @@ package net.simplewebapps.edcc.config;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.simplewebapps.edcc.event.Event;
-import net.simplewebapps.edcc.event.Fileheader;
-import net.simplewebapps.edcc.event.LoadGame;
+import net.simplewebapps.edcc.Event;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.core.type.filter.AssignableTypeFilter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Configuration
 public class ObjectMapperConfig {

@@ -10,7 +10,8 @@ public class Application {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class);
         JournalReader journalReader = ctx.getBean(JournalReader.class);
-        new Thread(() -> journalReader.readJournal(findNewestLogfile())).start();
+        journalReader.readJournal(findNewestLogfile());
+//        new Thread(() -> journalReader.readJournal(findNewestLogfile())).start();
     }
 
     private static String findNewestLogfile() {

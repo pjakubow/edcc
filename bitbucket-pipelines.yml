@@ -8,6 +8,6 @@ image: frekele/gradle:latest
 pipelines:
   default:
     - step:
-        script: # Modify the commands below to build your repository.
+        script: # Modify the commands below to build your eventEmitter.
           - gradle -v
           - gradle test

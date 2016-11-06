@@ -1,5 +1,6 @@
 package net.simplewebapps.edcc;
 
+import net.simplewebapps.edcc.event.UnknownTypeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,14 @@ public class JournalReader {
 
     private final LogParser logParser;
 
-    private final Repository repository;
+    private final EventBus eventBus;
 
     private long pointer = 0;
 
     @Autowired
-    public JournalReader(LogParser logParser, Repository repository) {
+    public JournalReader(LogParser logParser, EventBus eventBus) {
         this.logParser = logParser;
-        this.repository = repository;
+        this.eventBus = eventBus;
     }
 
     public void readJournal(String journalFile) {
@@ -40,11 +41,11 @@ public class JournalReader {
         while (true) {
             pointer = file.getFilePointer();
             try {
-                repository.save(logParser.parseLine(file.readLine()));
+                eventBus.publish(logParser.parseLine(file.readLine()));
                 failures = 0;
             } catch (LogParser.UnknownTypeException ute) {
                 log.warn(ute.getMessage());
-                repository.saveUnknownType(ute.getType());
+                eventBus.publish(new UnknownTypeEvent(ute.getType()));
             } catch (Exception e) {
                 log.warn(e.getMessage());
                 log.info("current pointer: {}, saved pointer: {}", file.getFilePointer(), pointer);

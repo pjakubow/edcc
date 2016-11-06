@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.event;
+package net.simplewebapps.edcc;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;

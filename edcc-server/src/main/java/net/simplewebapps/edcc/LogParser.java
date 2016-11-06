@@ -1,13 +1,9 @@
 package net.simplewebapps.edcc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
-import net.simplewebapps.edcc.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class LogParser {

@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -119,15 +117,16 @@ public class LogParserTest {
 
         // then
         assertThat(event).isInstanceOf(LoadGame.class);
-        assertThat(((LoadGame) event).getCommander()).isEqualTo("AJRee");
-        assertThat(((LoadGame) event).getShip()).isEqualTo("CobraMkIII");
-        assertThat(((LoadGame) event).getShipId()).isEqualTo(1);
-        assertThat(((LoadGame) event).getStartLanded()).isNull();
-        assertThat(((LoadGame) event).getStartDead()).isNull();
-        assertThat(((LoadGame) event).getGameMode()).isEqualTo(GameMode.Group);
-        assertThat(((LoadGame) event).getGroup()).isEqualTo("Le Group Name");
-        assertThat(((LoadGame) event).getCredits()).isEqualTo(600_120);
-        assertThat(((LoadGame) event).getLoan()).isEqualTo(0);
+        LoadGame loadGameEvent = (LoadGame) event;
+        assertThat(loadGameEvent.getCommander()).isEqualTo("AJRee");
+        assertThat(loadGameEvent.getShip()).isEqualTo("CobraMkIII");
+        assertThat(loadGameEvent.getShipId()).isEqualTo(1);
+        assertThat(loadGameEvent.getStartLanded()).isNull();
+        assertThat(loadGameEvent.getStartDead()).isNull();
+        assertThat(loadGameEvent.getGameMode()).isEqualTo(GameMode.Group);
+        assertThat(loadGameEvent.getGroup()).isEqualTo("Le Group Name");
+        assertThat(loadGameEvent.getCredits()).isEqualTo(600_120);
+        assertThat(loadGameEvent.getLoan()).isEqualTo(0);
     }
 
     /*

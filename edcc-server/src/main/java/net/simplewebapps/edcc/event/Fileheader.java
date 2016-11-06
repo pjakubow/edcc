@@ -1,6 +1,7 @@
 package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import net.simplewebapps.edcc.Event;
 
 @JsonTypeName
 public class Fileheader extends Event {

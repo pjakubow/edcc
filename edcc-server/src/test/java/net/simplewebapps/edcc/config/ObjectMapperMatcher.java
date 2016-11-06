@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
 import com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver;
-import net.simplewebapps.edcc.event.Event;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
 import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ObjectMapperMatcher extends TypeSafeMatcher<ObjectMapper> {

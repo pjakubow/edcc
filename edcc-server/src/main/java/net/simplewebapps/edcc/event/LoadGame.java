@@ -2,6 +2,7 @@ package net.simplewebapps.edcc.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import net.simplewebapps.edcc.Event;
 import net.simplewebapps.edcc.GameMode;
 
 @JsonTypeName
