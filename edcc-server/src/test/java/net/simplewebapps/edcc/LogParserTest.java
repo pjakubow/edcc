@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,7 +84,8 @@ public class LogParserTest {
     }
 
     private String format(Date timestamp) {
-        return new SimpleDateFormat(DATE_FORMAT).format(timestamp);
+        ZonedDateTime zonedDateTime = timestamp.toInstant().atZone(ZoneId.of("Europe/Warsaw"));
+        return zonedDateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     private Date toDate(LocalDateTime localDateTime) {
