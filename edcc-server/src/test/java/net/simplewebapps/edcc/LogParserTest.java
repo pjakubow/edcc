@@ -129,6 +129,44 @@ public class LogParserTest {
         assertThat(loadGameEvent.getLoan()).isEqualTo(0);
     }
 
+    @Test
+    public void shouldParseProgressEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-06-10T14:32:03Z\", \"event\":\"Progress\", \"Combat\":77, \"Trade\":9, \"Explore\":93, \"Empire\":0, \"Federation\":0, \"CQC\":0 }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Progress.class);
+        Progress progress = (Progress) event;
+        assertThat(progress.getCombat()).isEqualTo(77);
+        assertThat(progress.getTrade()).isEqualTo(9);
+        assertThat(progress.getExplore()).isEqualTo(93);
+        assertThat(progress.getEmpire()).isEqualTo(0);
+        assertThat(progress.getFederation()).isEqualTo(0);
+        assertThat(progress.getCqc()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldParseRankEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-06-10T14:32:03Z\", \"event\":\"Rank\", \"Combat\":2, \"Trade\":2, \"Explore\":5, \"Empire\":1, \"Federation\":3, \"CQC\":0 }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Rank.class);
+        Rank rank = (Rank) event;
+        assertThat(rank.getCombat()).isEqualTo(2);
+        assertThat(rank.getTrade()).isEqualTo(2);
+        assertThat(rank.getExplore()).isEqualTo(5);
+        assertThat(rank.getEmpire()).isEqualTo(1);
+        assertThat(rank.getFederation()).isEqualTo(3);
+        assertThat(rank.getCqc()).isEqualTo(0);
+    }
+
     /*
 
     @Test
