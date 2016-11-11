@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.simplewebapps.edcc.gui.AbstractJavaFxApplicationSupport;
+import net.simplewebapps.edcc.gui.RootController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -31,9 +32,10 @@ public class JavaFxMain extends AbstractJavaFxApplicationSupport {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/root.fxml"));
 		fxmlLoader.setControllerFactory(getControllerFactory());
 		Parent root = fxmlLoader.load();
+		((RootController) fxmlLoader.getController()).setCallingStage(primaryStage);
 		primaryStage.setTitle(windowTitle);
 		primaryStage.setScene(new Scene(root, 300, 275));
 		primaryStage.show();

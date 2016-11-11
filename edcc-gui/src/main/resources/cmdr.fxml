@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/8.0.112-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.simplewebapps.edcc.gui.CmdrController">
+
+    <GridPane>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </padding>
+        <Label fx:id="cmdrName"/>
+    </GridPane>
+
+    <GridPane hgap="10.0" vgap="10.0" alignment="CENTER_LEFT" maxWidth="Infinity">
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </padding>
+
+        <children>
+
+            <Label text="Combat:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="combatRank" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <ProgressIndicator fx:id="combatProgress" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+            <Label text="Trade:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="tradeRank" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <ProgressIndicator fx:id="tradeProgress" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+            <Label text="Exploration:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="explorationRank" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <ProgressIndicator fx:id="explorationProgress" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+            <Label text="Empire:" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+            <Label fx:id="empireRank" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+            <ProgressIndicator fx:id="empireProgress" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+
+            <Label text="Federation:" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+            <Label fx:id="federationRank" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+            <ProgressIndicator fx:id="federationProgress" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+
+            <Label text="CQC:" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+            <Label fx:id="cqcRank" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+            <ProgressIndicator fx:id="cqcProgress" GridPane.columnIndex="5" GridPane.rowIndex="3"/>
+        </children>
+    </GridPane>
+</VBox>

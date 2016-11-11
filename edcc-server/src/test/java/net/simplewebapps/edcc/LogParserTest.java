@@ -167,6 +167,22 @@ public class LogParserTest {
         assertThat(rank.getCqc()).isEqualTo(0);
     }
 
+    @Test
+    public void shouldParseReceiveTextEvent() throws Exception {
+        // given
+        String line = "{ \"timestamp\":\"2016-10-29T22:59:55Z\", \"event\":\"ReceiveText\", \"From\":\"$npc_name_decorate:#name=Sergio Xisto;\", \"From_Localised\":\"Sergio Xisto\", \"Message\":\"$Police_Attack11;\", \"Message_Localised\":\"Justice awaits you, perp.\", \"Channel\":\"npc\" }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(ReceiveText.class);
+        ReceiveText receiveText = (ReceiveText) event;
+        assertThat(receiveText.getFrom()).isEqualTo("Sergio Xisto");
+        assertThat(receiveText.getMessage()).isEqualTo("Justice awaits you, perp.");
+        assertThat(receiveText.getChannel()).isEqualTo(Channel.npc);
+    }
+
     /*
 
     @Test
@@ -179,7 +195,8 @@ public class LogParserTest {
 
         // then
         assertThat(event).isInstanceOf(ClearSavedGame.class);
-        assertThat(((ClearSavedGame) event).getName()).isEqualTo("");
+        ClearSavedGame clearSavedGame = (ClearSavedGame) event;
+        assertThat(clearSavedGame.getName()).isEqualTo("");
     }
     */
 

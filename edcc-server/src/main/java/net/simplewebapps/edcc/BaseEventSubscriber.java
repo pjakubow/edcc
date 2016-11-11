@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-abstract public class BaseEventSubscriber implements EventSubscriber {
+public class BaseEventSubscriber implements EventSubscriber {
 
     private Map<Class<? extends Event>, Consumer<Event>> callbacks = new HashMap<>();
 
@@ -18,7 +18,7 @@ abstract public class BaseEventSubscriber implements EventSubscriber {
         callbacks.get(event.getClass()).accept(event);
     }
 
-    protected void addCallback(Class<? extends Event> clazz, Consumer<Event> callback) {
+    public void addCallback(Class<? extends Event> clazz, Consumer<Event> callback) {
         callbacks.put(clazz, callback);
     }
 }

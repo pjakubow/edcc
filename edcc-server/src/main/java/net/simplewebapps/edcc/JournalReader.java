@@ -19,6 +19,7 @@ public class JournalReader {
     private final EventBus eventBus;
 
     private long pointer = 0;
+    private boolean stopped = false;
 
     @Autowired
     public JournalReader(LogParser logParser, EventBus eventBus) {
@@ -36,9 +37,14 @@ public class JournalReader {
         }
     }
 
+    public void stopWatchdog() {
+        log.info("Stopping watchdog");
+        this.stopped = true;
+    }
+
     private void readLoop(RandomAccessFile file) throws InterruptedException, IOException {
         int failures = 0;
-        while (true) {
+        while (!stopped) {
             pointer = file.getFilePointer();
             try {
                 eventBus.publish(logParser.parseLine(file.readLine()));

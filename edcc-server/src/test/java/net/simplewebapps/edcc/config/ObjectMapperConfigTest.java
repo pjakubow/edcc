@@ -22,6 +22,8 @@ public class ObjectMapperConfigTest {
         assertThat(mapper, registers(NewCommander.class));
         assertThat(mapper, registers(Progress.class));
         assertThat(mapper, registers(Rank.class));
+
+        assertThat(mapper, registers(ReceiveText.class));
     }
 
     private ObjectMapperMatcher registers(Class<?> subtype) {
