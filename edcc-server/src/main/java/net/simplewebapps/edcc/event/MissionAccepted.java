@@ -211,4 +211,28 @@ public class MissionAccepted extends Event {
     public void setPassengerTypeLocalised(String passengerTypeLocalised) {
         this.passengerTypeLocalised = passengerTypeLocalised;
     }
+
+    @Override
+    public String toString() {
+        return "MissionAccepted{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", faction='" + faction + '\'' +
+                ", commodity='" + commodity + '\'' +
+                ", commodityLocalised='" + commodityLocalised + '\'' +
+                ", count=" + count +
+                ", target='" + target + '\'' +
+                ", targetType='" + targetType + '\'' +
+                ", targetTypeLocalised='" + targetTypeLocalised + '\'' +
+                ", targetFaction='" + targetFaction + '\'' +
+                ", expiry=" + expiry +
+                ", destinationSystem='" + destinationSystem + '\'' +
+                ", destinationStation='" + destinationStation + '\'' +
+                ", passengerCount=" + passengerCount +
+                ", passengerVIPs=" + passengerVIPs +
+                ", passengerWanted=" + passengerWanted +
+                ", passengerType='" + passengerType + '\'' +
+                ", passengerTypeLocalised='" + passengerTypeLocalised + '\'' +
+                '}';
+    }
 }

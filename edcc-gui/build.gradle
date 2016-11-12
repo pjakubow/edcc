@@ -32,7 +32,7 @@ jfx {
   vendor = 'SimpleWebApps'
   appName = "EDCC"
 
-  bundler = 'exe'
+  bundler = 'ALL'
 
   certDomain = 'simplewebapps.net' // required
   certOrgUnit = null // defaults to "none"

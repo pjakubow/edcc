@@ -183,4 +183,26 @@ public class MissionCompleted extends Event {
     public void setDonation(Long donation) {
         this.donation = donation;
     }
+
+    @Override
+    public String toString() {
+        return "MissionCompleted{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", faction='" + faction + '\'' +
+                ", commodity='" + commodity + '\'' +
+                ", commodityLocalised='" + commodityLocalised + '\'' +
+                ", count=" + count +
+                ", target='" + target + '\'' +
+                ", targetType='" + targetType + '\'' +
+                ", targetTypeLocalised='" + targetTypeLocalised + '\'' +
+                ", targetFaction='" + targetFaction + '\'' +
+                ", destinationSystem='" + destinationSystem + '\'' +
+                ", destinationStation='" + destinationStation + '\'' +
+                ", reward=" + reward +
+                ", donation=" + donation +
+                ", permitsAwarded=" + permitsAwarded +
+                ", commodityRewards=" + commodityRewards +
+                '}';
+    }
 }
