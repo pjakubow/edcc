@@ -2,6 +2,7 @@ package net.simplewebapps.edcc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.simplewebapps.edcc.JournalReader;
+import net.simplewebapps.edcc.matchers.ObjectMapperMatcher;
 import net.simplewebapps.edcc.event.*;
 import org.junit.Test;
 
@@ -24,6 +25,11 @@ public class ObjectMapperConfigTest {
         assertThat(mapper, registers(Rank.class));
 
         assertThat(mapper, registers(ReceiveText.class));
+
+        assertThat(mapper, registers(MissionAbandoned.class));
+        assertThat(mapper, registers(MissionAccepted.class));
+        assertThat(mapper, registers(MissionCompleted.class));
+        assertThat(mapper, registers(MissionFailed.class));
     }
 
     private ObjectMapperMatcher registers(Class<?> subtype) {

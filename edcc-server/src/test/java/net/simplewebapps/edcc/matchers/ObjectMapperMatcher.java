@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.config;
+package net.simplewebapps.edcc.matchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
