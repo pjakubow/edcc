@@ -12,17 +12,17 @@
     </padding>
     <TableView fx:id="msgsTable">
         <columns>
-            <TableColumn text="Time" fx:id="timestampCol">
+            <TableColumn text="Time" fx:id="timestampCol" prefWidth="120">
                 <cellValueFactory>
                     <PropertyValueFactory property="time"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="From">
+            <TableColumn text="From" prefWidth="100">
                 <cellValueFactory>
                     <PropertyValueFactory property="from"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Message">
+            <TableColumn text="Message" prefWidth="220">
                 <cellValueFactory>
                     <PropertyValueFactory property="message"/>
                 </cellValueFactory>
