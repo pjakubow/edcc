@@ -30,6 +30,8 @@ public class ObjectMapperConfigTest {
         assertThat(mapper, registers(MissionAccepted.class));
         assertThat(mapper, registers(MissionCompleted.class));
         assertThat(mapper, registers(MissionFailed.class));
+
+        assertThat(mapper, registers(Scan.class));
     }
 
     private ObjectMapperMatcher registers(Class<?> subtype) {

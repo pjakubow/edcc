@@ -402,6 +402,227 @@ public class LogParserTest {
         assertThat(missionFailed.getName()).isEqualTo("Mission_Collect_name");
     }
 
+    @Test
+    public void shouldParseScanEventForAPlanet() throws Exception {
+        // given
+        String line = "{ " +
+                "\"timestamp\":\"2016-09-22T10:40:44Z\", " +
+                "\"event\":\"Scan\", " +
+                "\"BodyName\":\"Bei Dou Sector JH-V b2-1 1\"," +
+                "\"DistanceFromArrivalLS\":392.607605, " +
+                "\"TidalLock\":false, " +
+                "\"TerraformState\":\"\", " +
+                "\"PlanetClass\":\"Icy body\", " +
+                "\"Atmosphere\":\"thin neon rich atmosphere\", " +
+                "\"Volcanism\":\"\", " +
+                "\"MassEM\":0.190769," +
+                "\"Radius\":4412562.000000, " +
+                "\"SurfaceGravity\":3.905130, " +
+                "\"SurfaceTemperature\":64.690628, " +
+                "\"SurfacePressure\":321.596558, " +
+                "\"Landable\":false, " +
+                "\"SemiMajorAxis\":117704065024.000000, " +
+                "\"Eccentricity\":0.000033, " +
+                "\"Periapsis\":5.692884, " +
+                "\"OrbitalPeriod\":43704092.000000, " +
+                "\"RotationPeriod\":104296.351563 }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Scan.class);
+        Scan scan = (Scan) event;
+        assertThat(scan.getName()).isEqualTo("Bei Dou Sector JH-V b2-1 1");
+        assertThat(scan.getDistanceFromArrival()).isEqualTo(392.607605);
+        assertThat(scan.getTidalLocked()).isEqualTo(false);
+        assertThat(scan.getTerraformState()).isEqualTo("");
+        assertThat(scan.getPlanetClass()).isEqualTo("Icy body");
+        assertThat(scan.getAtmosphere()).isEqualTo("thin neon rich atmosphere");
+        assertThat(scan.getVolcanism()).isEqualTo("");
+        assertThat(scan.getMassEM()).isEqualTo(0.190769);
+        assertThat(scan.getStarType()).isNull();
+        assertThat(scan.getStellarMass()).isNull();
+        assertThat(scan.getRadius()).isEqualTo(4412562.000000);
+        assertThat(scan.getSurfaceGravity()).isEqualTo(3.905130);
+        assertThat(scan.getSurfaceTemperature()).isEqualTo(64.690628);
+        assertThat(scan.getSurfacePressure()).isEqualTo(321.596558);
+        assertThat(scan.getAbsoluteMagnitude()).isNull();
+        assertThat(scan.getAge()).isNull();
+        assertThat(scan.getLandable()).isEqualTo(false);
+        assertThat(scan.getSemiMajorAxis()).isEqualTo(117704065024.000000);
+        assertThat(scan.getEccentricity()).isEqualTo(0.000033);
+        assertThat(scan.getPeriapsis()).isEqualTo(5.692884);
+        assertThat(scan.getOrbitalPeriod()).isEqualTo(43704092.000000);
+        assertThat(scan.getRotationPeriod()).isEqualTo(104296.351563);
+        assertThat(scan.getMaterials()).isNotNull();
+        assertThat(scan.getMaterials()).isEmpty();
+        assertThat(scan.getRings()).isNotNull();
+        assertThat(scan.getRings()).isEmpty();
+    }
+
+    @Test
+    public void shouldParseScanEventForAPlanetWithMaterials() throws Exception {
+        String line = "{ " +
+                "\"timestamp\":\"2016-10-27T22:29:49Z\", " +
+                "\"event\":\"Scan\", " +
+                "\"BodyName\":\"LP 36-115 A 1 a\", " +
+                "\"DistanceFromArrivalLS\":1362.646362, " +
+                "\"TidalLock\":true, " +
+                "\"TerraformState\":\"\", " +
+                "\"PlanetClass\":\"Icy body\", " +
+                "\"Atmosphere\":\"\", " +
+                "\"Volcanism\":\"major water geysers volcanism\", " +
+                "\"MassEM\":0.000200, " +
+                "\"Radius\":517357.781250, " +
+                "\"SurfaceGravity\":0.297809, " +
+                "\"SurfaceTemperature\":95.017609, " +
+                "\"SurfacePressure\":0.000000, " +
+                "\"Landable\":true, " +
+                "\"Materials\":{ " +
+                    "\"sulphur\":27.6, " +
+                    "\"carbon\":23.2, " +
+                    "\"phosphorus\":14.8, " +
+                    "\"iron\":12.6, " +
+                    "\"nickel\":9.5, " +
+                    "\"manganese\":5.2, " +
+                    "\"vanadium\":3.1, " +
+                    "\"arsenic\":1.6, " +
+                    "\"tellurium\":0.9, " +
+                    "\"niobium\":0.9, " +
+                    "\"tungsten\":0.7 }, " +
+                "\"SemiMajorAxis\":1307086.875000, " +
+                "\"Eccentricity\":0.043846, " +
+                "\"OrbitalInclination\":-7.219698, " +
+                "\"Periapsis\":208.774216, " +
+                "\"OrbitalPeriod\":75015.984375, " +
+                "\"RotationPeriod\":109376.093750 }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Scan.class);
+        Scan scan = (Scan) event;
+        assertThat(scan.getLandable()).isEqualTo(true);
+        assertThat(scan.getMaterials().size()).isEqualTo(11);
+        assertThat(scan.getMaterials().get("phosphorus")).isEqualTo(14.8);
+    }
+
+    @Test
+    public void shouldParseScanEventForAStar() throws Exception {
+        // given
+        String line = "{ " +
+                "\"timestamp\":\"2016-10-28T18:27:33Z\", " +
+                "\"event\":\"Scan\", " +
+                "\"BodyName\":\"Betelgeuse\", " +
+                "\"DistanceFromArrivalLS\":0.000000, " +
+                "\"StarType\":\"M_RedSuperGiant\", " +
+                "\"StellarMass\":0.257813, " +
+                "\"Radius\":445379215360.000000, " +
+                "\"AbsoluteMagnitude\":-5.468781, " +
+                "\"Age_MY\":10402, " +
+                "\"SurfaceTemperature\":2445.000000, " +
+                "\"RotationPeriod\":242753520.000000 }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Scan.class);
+        Scan scan = (Scan) event;
+        assertThat(scan.getName()).isEqualTo("Betelgeuse");
+        assertThat(scan.getDistanceFromArrival()).isEqualTo(0.000000);
+        assertThat(scan.getTidalLocked()).isNull();
+        assertThat(scan.getTerraformState()).isNull();
+        assertThat(scan.getPlanetClass()).isNull();
+        assertThat(scan.getAtmosphere()).isNull();
+        assertThat(scan.getVolcanism()).isNull();
+        assertThat(scan.getMassEM()).isNull();
+        assertThat(scan.getStarType()).isEqualTo("M_RedSuperGiant");
+        assertThat(scan.getStellarMass()).isEqualTo(0.257813);
+        assertThat(scan.getRadius()).isEqualTo(445379215360.000000);
+        assertThat(scan.getAbsoluteMagnitude()).isEqualTo(-5.468781);
+        assertThat(scan.getAge()).isEqualTo(10402);
+        assertThat(scan.getSurfaceGravity()).isNull();
+        assertThat(scan.getSurfaceTemperature()).isEqualTo(2445.000000);
+        assertThat(scan.getSurfacePressure()).isNull();
+        assertThat(scan.getLandable()).isNull();
+        assertThat(scan.getSemiMajorAxis()).isNull();
+        assertThat(scan.getEccentricity()).isNull();
+        assertThat(scan.getPeriapsis()).isNull();
+        assertThat(scan.getOrbitalPeriod()).isNull();
+        assertThat(scan.getRotationPeriod()).isEqualTo(242753520.000000);
+        assertThat(scan.getMaterials()).isNotNull();
+        assertThat(scan.getMaterials()).isEmpty();
+        assertThat(scan.getRings()).isNotNull();
+        assertThat(scan.getRings()).isEmpty();
+    }
+
+    @Test
+    public void shouldParseScanEventForARingedPlanet() throws Exception {
+        // given
+        String line = "{ " +
+                "\"timestamp\":\"2016-10-27T22:24:19Z\", " +
+                "\"event\":\"Scan\", " +
+                "\"BodyName\":\"LP 36-115 A 1\", " +
+                "\"DistanceFromArrivalLS\":1362.164795, " +
+                "\"TidalLock\":false, " +
+                "\"TerraformState\":\"\", " +
+                "\"PlanetClass\":\"Sudarsky class I gas giant\", " +
+                "\"Atmosphere\":\"\", " +
+                "\"Volcanism\":\"\", " +
+                "\"MassEM\":96.031731, " +
+                "\"Radius\":60186644.000000, " +
+                "\"SurfaceGravity\":10.566322, " +
+                "\"SurfaceTemperature\":112.272552, " +
+                "\"SurfacePressure\":0.000000, " +
+                "\"Landable\":false, " +
+                "\"SemiMajorAxis\":408490409984.000000, " +
+                "\"Eccentricity\":0.000605, " +
+                "\"OrbitalInclination\":-0.320333, " +
+                "\"Periapsis\":101.359970, " +
+                "\"OrbitalPeriod\":236128960.000000, " +
+                "\"RotationPeriod\":110902.265625, " +
+                "\"Rings\":[ " +
+                    "{ " +
+                        "\"Name\":\"LP 36-115 A 1 A Ring\", " +
+                        "\"RingClass\":\"eRingClass_Rocky\", " +
+                        "\"MassMT\":4.5813e+10, " +
+                        "\"InnerRad\":1.1684e+08, " +
+                        "\"OuterRad\":1.234e+08 " +
+                    "}, " +
+                    "{ " +
+                        "\"Name\":\"LP 36-115 A 1 B Ring\", " +
+                        "\"RingClass\":\"eRingClass_Icy\", " +
+                        "\"MassMT\":2.9625e+11, " +
+                        "\"InnerRad\":1.235e+08, " +
+                        "\"OuterRad\":1.5942e+08 " +
+                    "} " +
+                "] }";
+
+        // when
+        Event event = logParser.parseLine(line);
+
+        // then
+        assertThat(event).isInstanceOf(Scan.class);
+        Scan scan = (Scan) event;
+        assertThat(scan.getName()).isEqualTo("LP 36-115 A 1");
+        assertThat(scan.getRings().size()).isEqualTo(2);
+
+        assertThat(scan.getRings().get(0).getName()).isEqualTo("LP 36-115 A 1 A Ring");
+        assertThat(scan.getRings().get(0).getRingClass()).isEqualTo("eRingClass_Rocky");
+        assertThat(scan.getRings().get(0).getMass()).isEqualTo(4.5813e+10);
+        assertThat(scan.getRings().get(0).getInnerRadius()).isEqualTo(1.1684e+08);
+        assertThat(scan.getRings().get(0).getOuterRadius()).isEqualTo(1.234e+08);
+
+        assertThat(scan.getRings().get(1).getName()).isEqualTo("LP 36-115 A 1 B Ring");
+        assertThat(scan.getRings().get(1).getRingClass()).isEqualTo("eRingClass_Icy");
+        assertThat(scan.getRings().get(1).getMass()).isEqualTo(2.9625e+11);
+        assertThat(scan.getRings().get(1).getInnerRadius()).isEqualTo(1.235e+08);
+        assertThat(scan.getRings().get(1).getOuterRadius()).isEqualTo(1.5942e+08);
+    }
+
     /*
 
     @Test
