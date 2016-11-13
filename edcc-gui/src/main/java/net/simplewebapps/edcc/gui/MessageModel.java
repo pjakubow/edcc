@@ -5,9 +5,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import net.simplewebapps.edcc.event.ReceiveText;
+import net.simplewebapps.edcc.util.DateUtil;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 public class MessageModel {
 
@@ -20,7 +20,7 @@ public class MessageModel {
         from = new SimpleStringProperty(this, "from", receiveText.getFrom());
         message = new SimpleStringProperty(this, "message", receiveText.getMessage());
         channel = new SimpleStringProperty(this, "channel", receiveText.getChannel().name());
-        time = new SimpleObjectProperty<>(this, "time", receiveText.getTimestamp().toInstant().atZone(ZoneId.of("Europe/Warsaw")).toLocalDateTime());
+        time = new SimpleObjectProperty<>(this, "time", DateUtil.toLocalDateTime(receiveText.getTimestamp()));
     }
 
     public String getFrom() {

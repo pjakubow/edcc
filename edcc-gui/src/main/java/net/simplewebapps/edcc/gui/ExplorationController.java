@@ -1,7 +1,45 @@
 package net.simplewebapps.edcc.gui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.VBox;
+import net.simplewebapps.edcc.JavaFxEventSubscriber;
+import net.simplewebapps.edcc.event.Scan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
+
 @Component
-public class ExplorationController {
+public class ExplorationController implements Initializable {
+
+    @FXML private TableView<ExplorationModel> explorationTable;
+    @FXML private TableColumn<ExplorationModel, LocalDateTime> timestampCol;
+
+    private ObservableList<ExplorationModel> explorationData = FXCollections.observableArrayList();
+
+    private JavaFxEventSubscriber eventSubscriber;
+
+    @Autowired
+    public ExplorationController(JavaFxEventSubscriber eventSubscriber) {
+        this.eventSubscriber = eventSubscriber;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
+        explorationTable.setItems(explorationData);
+        eventSubscriber.addCallback(Scan.class, (scan) -> onScanEvent((Scan) scan));
+    }
+
+    private void onScanEvent(Scan scan) {
+        explorationData.add(new ExplorationModel(scan));
+    }
 }

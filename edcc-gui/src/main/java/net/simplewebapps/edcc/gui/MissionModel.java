@@ -5,10 +5,9 @@ import net.simplewebapps.edcc.event.MissionAbandoned;
 import net.simplewebapps.edcc.event.MissionAccepted;
 import net.simplewebapps.edcc.event.MissionCompleted;
 import net.simplewebapps.edcc.event.MissionFailed;
+import net.simplewebapps.edcc.util.DateUtil;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class MissionModel {
 
@@ -29,12 +28,12 @@ public class MissionModel {
         this.id = new SimpleLongProperty(this, "id", mission.getId());
         this.name = new SimpleStringProperty(this, "name", mission.getName());
         this.faction = new SimpleStringProperty(this, "faction", mission.getFaction());
-        this.time = new SimpleObjectProperty<>(this, "time", toLocalDateTime(mission.getTimestamp()));
+        this.time = new SimpleObjectProperty<>(this, "time", DateUtil.toLocalDateTime(mission.getTimestamp()));
         this.state = new SimpleObjectProperty<>(this, "state", MissionState.ACCEPTED);
 
         LocalDateTime expiry = null;
         if (mission.getExpiry() != null) {
-            expiry = toLocalDateTime(mission.getExpiry());
+            expiry = DateUtil.toLocalDateTime(mission.getExpiry());
         }
         this.expiry = new SimpleObjectProperty<>(this, "expiry", expiry);
         this.abandoned = new SimpleObjectProperty<>(this, "abandoned", null);
@@ -43,10 +42,6 @@ public class MissionModel {
 
         this.accDetails = new SimpleObjectProperty<>(this, "accDetails", mission);
         this.cplDetails = new SimpleObjectProperty<>(this, "cplDetails", null);
-    }
-
-    private LocalDateTime toLocalDateTime(Date date) {
-        return date.toInstant().atZone(ZoneId.of("Europe/Warsaw")).toLocalDateTime();
     }
 
     public long getId() {
@@ -139,17 +134,17 @@ public class MissionModel {
 
     public void setAbandoned(MissionAbandoned mission) {
         state.set(MissionState.ABANDONED);
-        abandoned.set(toLocalDateTime(mission.getTimestamp()));
+        abandoned.set(DateUtil.toLocalDateTime(mission.getTimestamp()));
     }
 
     public void setFailed(MissionFailed mission) {
         state.set(MissionState.FAILED);
-        failed.set(toLocalDateTime(mission.getTimestamp()));
+        failed.set(DateUtil.toLocalDateTime(mission.getTimestamp()));
     }
 
     public void setCompleted(MissionCompleted mission) {
         state.set(MissionState.COMPLETED);
-        completed.set(toLocalDateTime(mission.getTimestamp()));
+        completed.set(DateUtil.toLocalDateTime(mission.getTimestamp()));
         cplDetails.set(mission);
     }
 }
