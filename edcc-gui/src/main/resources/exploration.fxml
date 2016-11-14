@@ -4,6 +4,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TextArea?>
 <VBox xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:id="explorationTab"
       fx:controller="net.simplewebapps.edcc.gui.ExplorationController">
     <padding>
@@ -43,4 +44,6 @@
             </TableColumn>
         </columns>
     </TableView>
+
+    <TextArea fx:id="scanDetails" />
 </VBox>

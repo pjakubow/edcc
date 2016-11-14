@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import net.simplewebapps.edcc.JavaFxEventSubscriber;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 @Component
 public class ExplorationController implements Initializable {
 
+    @FXML private TextArea scanDetails;
     @FXML private TableView<ExplorationModel> explorationTable;
     @FXML private TableColumn<ExplorationModel, LocalDateTime> timestampCol;
 
@@ -36,6 +38,7 @@ public class ExplorationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
         explorationTable.setItems(explorationData);
+        explorationTable.getSelectionModel().selectedItemProperty().addListener((a, b, c) -> scanDetails.setText(c.getDetails().toFormattedString()));
         eventSubscriber.addCallback(Scan.class, (scan) -> onScanEvent((Scan) scan));
     }
 

@@ -11,6 +11,7 @@ public class ExplorationModel {
 
     public static final String PLANET = "Planet";
     public static final String STAR = "Star";
+    private final Scan details;
 
     private ObjectProperty<LocalDateTime> time;
     private StringProperty name;
@@ -27,6 +28,7 @@ public class ExplorationModel {
         this.bodyClass = new SimpleStringProperty(this, "", PLANET.equals(bodyType) ? scan.getPlanetClass() : scan.getStarType());
         this.landable = new SimpleBooleanProperty(this, "", PLANET.equals(bodyType) ? scan.getLandable() : false);
         this.gravity = new SimpleDoubleProperty(this, "", scan.getSurfaceGravity() == null ? -1d : scan.getSurfaceGravity());
+        this.details = scan;
     }
 
     public LocalDateTime getTime() {
@@ -99,5 +101,9 @@ public class ExplorationModel {
 
     public void setGravity(double gravity) {
         this.gravity.set(gravity);
+    }
+
+    public Scan getDetails() {
+        return details;
     }
 }
