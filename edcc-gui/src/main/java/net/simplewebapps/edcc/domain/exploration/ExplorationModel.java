@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.domain.exploration;
 
 import javafx.beans.property.*;
 import net.simplewebapps.edcc.event.Scan;

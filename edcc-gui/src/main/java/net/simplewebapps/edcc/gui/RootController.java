@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.simplewebapps.edcc.BaseEventSubscriber;
-import net.simplewebapps.edcc.JavaFxEventSubscriber;
+import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.JournalReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

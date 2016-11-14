@@ -1,6 +1,8 @@
-package net.simplewebapps.edcc;
+package net.simplewebapps.edcc.util;
 
 import javafx.application.Platform;
+import net.simplewebapps.edcc.BaseEventSubscriber;
+import net.simplewebapps.edcc.Event;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Consumer;

@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.util;
 
 import javafx.util.StringConverter;
 

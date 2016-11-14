@@ -19,7 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import net.simplewebapps.edcc.gui.AbstractJavaFxApplicationSupport;
+import net.simplewebapps.edcc.spring.AbstractJavaFxApplicationSupport;
 import net.simplewebapps.edcc.gui.RootController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

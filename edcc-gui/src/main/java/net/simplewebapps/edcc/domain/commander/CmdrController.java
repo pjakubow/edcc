@@ -1,22 +1,18 @@
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.domain.commander;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.Tooltip;
-import net.simplewebapps.edcc.JavaFxEventSubscriber;
+import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.event.LoadGame;
 import net.simplewebapps.edcc.event.Progress;
 import net.simplewebapps.edcc.event.Rank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.NumberFormatter;
 import java.net.URL;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 @Component

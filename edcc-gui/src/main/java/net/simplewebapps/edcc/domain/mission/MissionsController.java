@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.domain.mission;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,11 +8,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.TextFieldTableCell;
-import net.simplewebapps.edcc.JavaFxEventSubscriber;
+import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.event.MissionAbandoned;
 import net.simplewebapps.edcc.event.MissionAccepted;
 import net.simplewebapps.edcc.event.MissionCompleted;
 import net.simplewebapps.edcc.event.MissionFailed;
+import net.simplewebapps.edcc.util.LocalDateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

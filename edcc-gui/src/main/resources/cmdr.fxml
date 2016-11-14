@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx/8.0.112-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="net.simplewebapps.edcc.gui.CmdrController">
+            fx:controller="net.simplewebapps.edcc.domain.commander.CmdrController">
 
     <GridPane>
         <padding>

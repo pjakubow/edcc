@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.spring;
 
 import javafx.application.Application;
 import javafx.util.Callback;

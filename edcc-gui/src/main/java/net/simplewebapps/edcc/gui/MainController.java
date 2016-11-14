@@ -3,7 +3,7 @@ package net.simplewebapps.edcc.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import net.simplewebapps.edcc.JavaFxEventSubscriber;
+import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

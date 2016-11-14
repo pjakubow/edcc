@@ -1,4 +1,4 @@
-package net.simplewebapps.edcc.gui;
+package net.simplewebapps.edcc.domain.message;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
