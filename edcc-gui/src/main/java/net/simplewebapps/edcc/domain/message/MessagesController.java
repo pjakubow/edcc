@@ -35,14 +35,15 @@ public class MessagesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-
         msgsTable.setItems(messages);
+        msgsTable.getSortOrder().add(timestampCol);
+        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
 
         eventSubscriber.addCallback(ReceiveText.class, (message) -> onMessage((ReceiveText) message));
     }
 
     private void onMessage(ReceiveText message) {
         messages.add(new MessageModel(message));
+        msgsTable.sort();
     }
 }

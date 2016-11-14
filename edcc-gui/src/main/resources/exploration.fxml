@@ -12,7 +12,7 @@
     </padding>
     <TableView fx:id="explorationTable">
         <columns>
-            <TableColumn text="Time" fx:id="timestampCol" prefWidth="120">
+            <TableColumn text="Time" fx:id="timestampCol" prefWidth="120" sortType="DESCENDING">
                 <cellValueFactory>
                     <PropertyValueFactory property="time"/>
                 </cellValueFactory>

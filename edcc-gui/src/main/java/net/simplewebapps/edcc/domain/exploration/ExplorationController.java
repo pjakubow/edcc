@@ -36,13 +36,15 @@ public class ExplorationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
         explorationTable.setItems(explorationData);
+        explorationTable.getSortOrder().add(timestampCol);
+        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
         explorationTable.getSelectionModel().selectedItemProperty().addListener((a, b, c) -> scanDetails.setText(c.getDetails().toFormattedString()));
         eventSubscriber.addCallback(Scan.class, (scan) -> onScanEvent((Scan) scan));
     }
 
     private void onScanEvent(Scan scan) {
         explorationData.add(new ExplorationModel(scan));
+        explorationTable.sort();
     }
 }

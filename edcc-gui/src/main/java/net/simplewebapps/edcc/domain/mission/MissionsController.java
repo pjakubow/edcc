@@ -4,10 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.event.MissionAbandoned;
 import net.simplewebapps.edcc.event.MissionAccepted;
@@ -44,16 +46,19 @@ public class MissionsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        timestampCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-        expiryCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-        completedCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-        abandonedCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-        failedCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
-
         missionsTable.setItems(missions);
-        missionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
-            missionDetails.setText(newSelection.getAccDetails().toString());
-        });
+        missionsTable.getSortOrder().add(timestampCol);
+
+        Callback<TableColumn<MissionModel, LocalDateTime>, TableCell<MissionModel, LocalDateTime>> localDateTimeCellFactory =
+                TextFieldTableCell.forTableColumn(new LocalDateTimeConverter());
+        timestampCol.setCellFactory(localDateTimeCellFactory);
+        expiryCol.setCellFactory(localDateTimeCellFactory);
+        completedCol.setCellFactory(localDateTimeCellFactory);
+        abandonedCol.setCellFactory(localDateTimeCellFactory);
+        failedCol.setCellFactory(localDateTimeCellFactory);
+
+        missionsTable.getSelectionModel().selectedItemProperty()
+                .addListener((a, b, c) -> missionDetails.setText(c.getAccDetails().toString()));
 
         eventSubscriber.addCallback(MissionAccepted.class, (mission) -> onMissionAccepted((MissionAccepted) mission));
         eventSubscriber.addCallback(MissionAbandoned.class, (mission) -> onMissionAbandoned((MissionAbandoned) mission));
@@ -63,6 +68,7 @@ public class MissionsController implements Initializable {
 
     private void onMissionAccepted(MissionAccepted mission) {
         missions.add(new MissionModel(mission));
+        missionsTable.sort();
     }
 
     private void onMissionAbandoned(MissionAbandoned mission) {
@@ -70,6 +76,7 @@ public class MissionsController implements Initializable {
                 .filter(mm -> mm.getId() == mission.getId())
                 .findAny()
                 .ifPresent(mm -> mm.setAbandoned(mission));
+        missionsTable.sort();
     }
 
     private void onMissionFailed(MissionFailed mission) {
@@ -77,6 +84,7 @@ public class MissionsController implements Initializable {
                 .filter(mm -> mm.getId() == mission.getId())
                 .findAny()
                 .ifPresent(mm -> mm.setFailed(mission));
+        missionsTable.sort();
     }
 
     private void onMissionCompleted(MissionCompleted mission) {
@@ -84,6 +92,7 @@ public class MissionsController implements Initializable {
                 .filter(mm -> mm.getId() == mission.getId())
                 .findAny()
                 .ifPresent(mm -> mm.setCompleted(mission));
+        missionsTable.sort();
     }
 
 }
