@@ -307,4 +307,65 @@ public class Scan extends Event {
     public void setOrbitalPeriod(Double orbitalPeriod) {
         this.orbitalPeriod = orbitalPeriod;
     }
+
+    public String toFormattedString() {
+        return "Scan{" +
+                "\nname='" + name + '\'' +
+                ", \ndistanceFromArrival=" + distanceFromArrival +
+                ", \ntidalLocked=" + tidalLocked +
+                ", \nterraformState='" + terraformState + '\'' +
+                ", \nstarType='" + starType + '\'' +
+                ", \nplanetClass='" + planetClass + '\'' +
+                ", \natmosphere='" + atmosphere + '\'' +
+                ", \nvolcanism='" + volcanism + '\'' +
+                ", \nstellarMass=" + stellarMass +
+                ", \nmassEM=" + massEM +
+                ", \nradius=" + radius +
+                ", \nabsoluteMagnitude=" + absoluteMagnitude +
+                ", \nsurfaceGravity=" + surfaceGravity +
+                ", \nsurfaceTemperature=" + surfaceTemperature +
+                ", \nsurfacePressure=" + surfacePressure +
+                ", \nlandable=" + landable +
+                ", \nmaterials=" + materials +
+                ", \nrotationPeriod=" + rotationPeriod +
+                ", \nage=" + age +
+                ", \nrings=" + rings +
+                ", \nsemiMajorAxis=" + semiMajorAxis +
+                ", \neccentricity=" + eccentricity +
+                ", \norbitalInclination=" + orbitalInclination +
+                ", \nperiapsis=" + periapsis +
+                ", \norbitalPeriod=" + orbitalPeriod +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        return "Scan{" +
+                "name='" + name + '\'' +
+                ", distanceFromArrival=" + distanceFromArrival +
+                ", tidalLocked=" + tidalLocked +
+                ", terraformState='" + terraformState + '\'' +
+                ", starType='" + starType + '\'' +
+                ", planetClass='" + planetClass + '\'' +
+                ", atmosphere='" + atmosphere + '\'' +
+                ", volcanism='" + volcanism + '\'' +
+                ", stellarMass=" + stellarMass +
+                ", massEM=" + massEM +
+                ", radius=" + radius +
+                ", absoluteMagnitude=" + absoluteMagnitude +
+                ", surfaceGravity=" + surfaceGravity +
+                ", surfaceTemperature=" + surfaceTemperature +
+                ", surfacePressure=" + surfacePressure +
+                ", landable=" + landable +
+                ", materials=" + materials +
+                ", rotationPeriod=" + rotationPeriod +
+                ", age=" + age +
+                ", rings=" + rings +
+                ", semiMajorAxis=" + semiMajorAxis +
+                ", eccentricity=" + eccentricity +
+                ", orbitalInclination=" + orbitalInclination +
+                ", periapsis=" + periapsis +
+                ", orbitalPeriod=" + orbitalPeriod +
+                '}';
+    }
 }

@@ -58,4 +58,15 @@ public class Ring {
     public void setOuterRadius(Double outerRadius) {
         this.outerRadius = outerRadius;
     }
+
+    @Override
+    public String toString() {
+        return "Ring{" +
+                "name='" + name + '\'' +
+                ", ringClass='" + ringClass + '\'' +
+                ", mass=" + mass +
+                ", innerRadius=" + innerRadius +
+                ", outerRadius=" + outerRadius +
+                '}';
+    }
 }

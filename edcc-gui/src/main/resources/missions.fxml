@@ -70,4 +70,6 @@
         </columns>
     </TableView>
 
+    <TextArea fx:id="missionDetails" />
+
 </VBox>

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.TextFieldTableCell;
 import net.simplewebapps.edcc.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.event.MissionAbandoned;
@@ -22,6 +23,7 @@ import java.util.ResourceBundle;
 @Component
 public class MissionsController implements Initializable {
 
+    @FXML private TextArea missionDetails;
     @FXML private TableView<MissionModel> missionsTable;
     @FXML private TableColumn<MissionModel, LocalDateTime> timestampCol;
     @FXML private TableColumn<MissionModel, LocalDateTime> expiryCol;
@@ -48,6 +50,9 @@ public class MissionsController implements Initializable {
         failedCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateTimeConverter()));
 
         missionsTable.setItems(missions);
+        missionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
+            missionDetails.setText(newSelection.getAccDetails().toString());
+        });
 
         eventSubscriber.addCallback(MissionAccepted.class, (mission) -> onMissionAccepted((MissionAccepted) mission));
         eventSubscriber.addCallback(MissionAbandoned.class, (mission) -> onMissionAbandoned((MissionAbandoned) mission));
