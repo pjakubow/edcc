@@ -37,7 +37,7 @@ public class JavaFxMain extends AbstractJavaFxApplicationSupport {
 		Parent root = fxmlLoader.load();
 		((RootController) fxmlLoader.getController()).setCallingStage(primaryStage);
 		primaryStage.setTitle(windowTitle);
-		primaryStage.setScene(new Scene(root, 300, 275));
+		primaryStage.setScene(new Scene(root, 600, 400));
 		primaryStage.show();
 	}
 

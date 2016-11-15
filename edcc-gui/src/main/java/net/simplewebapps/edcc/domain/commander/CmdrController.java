@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.text.Font;
 import net.simplewebapps.edcc.util.JavaFxEventSubscriber;
 import net.simplewebapps.edcc.event.LoadGame;
 import net.simplewebapps.edcc.event.Progress;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 @Component
@@ -43,6 +45,15 @@ public class CmdrController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        Font eurocaps24 = Font.loadFont(getClass().getResource("/fonts/EUROCAPS.TTF").toExternalForm(), 24);
+        Font telegrama24 = Font.loadFont(getClass().getResource("/fonts/telegrama_render.otf").toExternalForm(), 24);
+
+        cmdrName.setFont(eurocaps24);
+        Arrays.asList(empireRank, federationRank, cqcRank, tradeRank, combatRank, explorationRank)
+                .forEach(r -> r.setFont(telegrama24));
+
+
         eventSubscriber.addCallback(LoadGame.class, (loadGame) -> this.onLoadGame((LoadGame) loadGame));
         eventSubscriber.addCallback(Rank.class, (rank) -> this.onRank((Rank) rank));
         eventSubscriber.addCallback(Progress.class, (progress) -> this.onProgress((Progress) progress));

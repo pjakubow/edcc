@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefWidth="400" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.simplewebapps.edcc.gui.MainController">
+<?import javafx.scene.layout.VBox?>
+<VBox prefWidth="400" xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1">
 
-    <TabPane maxWidth="Infinity" AnchorPane.topAnchor="1" AnchorPane.leftAnchor="1" AnchorPane.rightAnchor="1">
+    <TabPane maxWidth="Infinity">
 
         <Tab fx:id="messagesTab" closable="false" text="Messages">
             <fx:include source="messages.fxml" />
@@ -17,4 +17,4 @@
             <fx:include source="exploration.fxml" />
         </Tab>
     </TabPane>
-</AnchorPane>
+</VBox>

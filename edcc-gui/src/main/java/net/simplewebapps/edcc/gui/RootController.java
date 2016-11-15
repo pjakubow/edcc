@@ -26,7 +26,7 @@ public class RootController implements Initializable {
 
     private final BaseEventSubscriber subscriber;
 
-    @FXML private AnchorPane mainArea;
+    @FXML private VBox mainArea;
     @FXML private VBox cmdrArea;
 
     @Value("${title.log.filechooser:Open log file}")
