@@ -3,7 +3,5 @@ build
 target
 .idea
 .gradle
-gradle
 *.iml
-gradlew*
 keystore.jks
