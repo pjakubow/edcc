@@ -41,7 +41,7 @@ public class MissionModel {
         this.completed = new SimpleObjectProperty<>(this, "completed", null);
 
         this.accDetails = new SimpleObjectProperty<>(this, "accDetails", mission);
-        this.cplDetails = new SimpleObjectProperty<>(this, "cplDetails", null);
+        this.cplDetails = new SimpleObjectProperty<>(this, "cplDetails", new MissionCompleted());
     }
 
     public long getId() {

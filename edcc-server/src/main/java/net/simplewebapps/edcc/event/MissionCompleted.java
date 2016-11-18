@@ -6,6 +6,7 @@ import net.simplewebapps.edcc.CommodityReward;
 import net.simplewebapps.edcc.Event;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName
@@ -43,9 +44,9 @@ public class MissionCompleted extends Event {
     @JsonProperty("Donation")
     private Long donation;
     @JsonProperty("PermitsAwarded")
-    private List<String> permitsAwarded;
+    private List<String> permitsAwarded = new ArrayList<>();
     @JsonProperty("CommodityReward")
-    private List<CommodityReward> commodityRewards;
+    private List<CommodityReward> commodityRewards = new ArrayList<>();
 
 
     public Long getId() {
