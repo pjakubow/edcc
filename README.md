@@ -14,17 +14,11 @@
 This project is written in Java 8 and uses [gradle](http://gradle.org) as a build tool. To build it you will need:
 
 * [JRE](http://www.java.com/download/) 8+
-* [Gradle](https://gradle.org/gradle-download/) 3.1+
 
-### Building runnable binary ###
+### Running project ###
 
-* (tbc)
+```
+./gradlew jfxRun
+```
 
-### Building native installer(s) ###
-
-* (tbc)
-
-### Owners of the repository ###
-
-* Piotr Jakubowski <pjakubow@gmail.com>
-* Wojtek Jakubowski <wojtekjakubo@gmail.com>
+Test journal location: `./edcc-server/src/test/resources/Journal.Voyak.log`
